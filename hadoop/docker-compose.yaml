@@ -21,7 +21,7 @@ services:
   slave1: 
     image: hadoop-slave
     container_name: slave1 
-    hostname: tanhung-slave1 
+    hostname: tanhung-slave1
     networks: 
       - hadoop-net 
     command: /bin/bash -c "service ssh start; tail -f /dev/null"
@@ -33,7 +33,7 @@ services:
   slave2: 
     image: hadoop-slave
     container_name: slave2 
-    hostname: tanhung-slave2 
+    hostname: tanhung-slave2
     networks: 
       - hadoop-net 
     command: /bin/bash -c "service ssh start; tail -f /dev/null"

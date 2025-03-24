@@ -17,13 +17,23 @@ limitations under the License. See accompanying LICENSE file.
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-	<property> 
+    <property>
 
-		<name>fs.defaultFS</name>
+        <name>hadoop.tmp.dir</name>
 
-		<value>hdfs://tanhung-master:9000</value>
+        <value>/home/hadooptanhung/tmp</value>
 
-		<description>Use HDFS as file storage engine</description>
+        <description>Temporary Directory.</description>
 
-	</property>
+    </property>
+
+    <property>
+
+        <name>fs.defaultFS</name>
+
+        <value>hdfs://tanhung-master:9000</value>
+
+        <description>Use HDFS as file storage engine</description>
+
+    </property>
 </configuration>
