@@ -12,7 +12,7 @@ services:
       - "8042:8042"
       - "8088:8088"
     networks:
-      - hadoop-net
+      - data_network
     command: /bin/bash -c "service ssh start; tail -f /dev/null"
     volumes:
       - ./data/namenode:/hadoop/dfs/name
@@ -23,7 +23,7 @@ services:
     container_name: slave1 
     hostname: tanhung-slave1
     networks: 
-      - hadoop-net 
+      - data_network
     command: /bin/bash -c "service ssh start; tail -f /dev/null"
     volumes:
       - ./data/datanode1:/hadoop/dfs/data
@@ -35,12 +35,15 @@ services:
     container_name: slave2 
     hostname: tanhung-slave2
     networks: 
-      - hadoop-net 
+      - data_network 
     command: /bin/bash -c "service ssh start; tail -f /dev/null"
     volumes:
       - ./data/datanode2:/hadoop/dfs/data
       - ./logs:/hadoop/logs
 
 networks:
-  hadoop-net:
+  data_network:
     driver: bridge
+    name: data_network
+    external: true
+
