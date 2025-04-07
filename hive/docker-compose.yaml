@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  mariadb:
+    image: mariadb:10.5.16
+    container_name: mariadb
+    volumes:
+      - ./mariadb:/var/lib/mysql
+    ports:
+      - "3309:3306"
+    env_file:
+      - .env
+    networks:
+      - data_network
+  
+  hive-metastore:
+    container_name: hive-metastore
+    hostname: hive-metastore
+    image: "bitsondatadev/hive-metastore:latest"
+    entrypoint: /entrypoint.sh
+    ports:
+      - "9083:9083"
+    volumes:
+      - ./hive-metastore/metastore-site.xml:/opt/apache-hive-metastore-3.0.0-bin/conf/metastore-site.xml:ro
+    environment:
+      METASTORE_DB_HOSTNAME: mariadb
+    networks:
+      - data_network
+    depends_on:
+      - mariadb
+
+networks:
+  data_network:
+    external: true
+    name: data_network
+
+volumes:
+  mariadb: {}
