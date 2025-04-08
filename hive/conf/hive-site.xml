@@ -1,5 +1,3 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
 <configuration>
     <property>
         <name>javax.jdo.option.ConnectionDriverName</name>
@@ -7,35 +5,15 @@
     </property>
     <property>
         <name>javax.jdo.option.ConnectionURL</name>
-        <value>jdbc:mysql://mariadb:3306/metastore_db?createDatabaseIfNotExist=true&amp;useSSL=false</value>
+        <value>jdbc:mysql://mariadb:3306/hive_metastore?createDatabaseIfNotExist=true</value>
     </property>
     <property>
         <name>javax.jdo.option.ConnectionUserName</name>
-        <value>hive</value>
+        <value>admin</value>
     </property>
     <property>
         <name>javax.jdo.option.ConnectionPassword</name>
-        <value>hive</value>
-    </property>
-    <property>
-        <name>datanucleus.autoCreateSchema</name>
-        <value>true</value>
-    </property>
-    <property>
-        <name>datanucleus.fixedDatastore</name>
-        <value>false</value>
-    </property>
-    <property>
-        <name>datanucleus.autoStartMechanismMode</name>
-        <value>SchemaTable</value>
-    </property>
-    <property>
-        <name>hive.metastore.schema.verification</name>
-        <value>false</value>
-    </property>
-    <property>
-        <name>hive.metastore.event.db.notification.api.auth</name>
-        <value>false</value>
+        <value>admin</value>
     </property>
     <property>
         <name>fs.s3a.access.key</name>
@@ -57,20 +35,4 @@
         <name>fs.s3a.connection.ssl.enabled</name>
         <value>false</value>
     </property>
-    <!-- <property>
-        <name>hive.metastore.warehouse.dir</name>
-        <value>s3a://lakehouse/</value>
-    </property> -->
-    <!-- <property>
-        <name>hive.input.format</name>
-        <value>io.delta.hive.HiveInputFormat</value>
-    </property>
-    <property>
-        <name>hive.output.format</name>
-        <value>io.delta.hive.HiveOutputFormat</value>
-    </property>
-    <property>
-        <name>hive.tez.input.format</name>
-       <value>io.delta.hive.HiveInputFormat</value>
-    </property> -->
 </configuration>
