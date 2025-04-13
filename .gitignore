@@ -1,2 +1,4 @@
 .idea/
 hive/mariadb/
+services
+hive-test-hiveserver2

@@ -32,31 +32,51 @@ services:
     depends_on:
       - mariadb
 
+
   hiveserver2:
     build:
       context: ./hiveserver2
       dockerfile: Dockerfile
-    image: custom-hive-server
+    image: hive-server
     container_name: hiveserver2
     ports:
       - "10000:10000"
       - "10002:10002"
-    environment:
-      SERVICE_NAME: hiveserver2
-      SERVICE_OPTS: -Dhive.metastore.uris=thrift://hive-metastore:9083
-      IS_RESUME: "true"
-    depends_on:
-      - hive-metastore
-    volumes:
-      - ./warehouse:/opt/hive/data/warehouse
-      - ../hive/conf/hive-site.xml:/opt/hive/conf/hive-site.xml
     networks:
       - data_network
+    volumes:
+      - /home/hungfnguyen/data_engineer/projects/bigdata-docker-setup/hadoop/config-hadoop/master/config/core-site.xml:/home/hadooptanhung/hive/conf/core-site.xml
+      - /home/hungfnguyen/data_engineer/projects/bigdata-docker-setup/hadoop/config-hadoop/master/config/hdfs-site.xml:/home/hadooptanhung/hive/conf/hdfs-site.xml
+    tty: true
+
+
+
+  # hiveserver2:
+  #   build:
+  #     context: ./hiveserver2
+  #     dockerfile: Dockerfile
+  #   image: hive-server
+  #   container_name: hiveserver2
+  #   ports:
+  #     - "10000:10000"
+  #     - "10002:10002"
+  #   environment:
+  #     SERVICE_NAME: hiveserver2
+  #     SERVICE_OPTS: -Dhive.metastore.uris=thrift://hive-metastore:9083
+  #     IS_RESUME: "true"
+  #   depends_on:
+  #     - hive-metastore
+  #   volumes:
+  #     - ./warehouse:/opt/hive/data/warehouse
+  #     - ../hive/conf/hive-site.xml:/opt/hive/conf/hive-site.xml
+  #   networks:
+  #     - data_network
 
 networks:
   data_network:
     driver: bridge
     name: data_network
+    external: true
 
 volumes:
   mariadb: {}
