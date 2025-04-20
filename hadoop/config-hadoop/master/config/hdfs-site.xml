@@ -36,5 +36,9 @@ limitations under the License. See accompanying LICENSE file.
 
         <value>/home/hadooptanhung/hadoop/hadoop_data/hdfs/datanode</value>
     </property>
+    <property>
+        <name>dfs.namenode.safemode.threshold-pct</name>
+        <value>0.0</value>
+    </property>
 
 </configuration>
