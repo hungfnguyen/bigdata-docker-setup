@@ -1,4 +1,4 @@
-FROM hadoop-pig
+FROM hadoop-master
 
 USER hadooptanhung
 WORKDIR /home/hadooptanhung/
@@ -17,10 +17,19 @@ COPY conf/hive-env.sh /home/hadooptanhung/hive/conf/
 USER root
 RUN dos2unix /home/hadooptanhung/.bashrc && \
     dos2unix /home/hadooptanhung/hive/conf/hive-site.xml && \
-    dos2unix /home/hadooptanhung/hive/conf/hive-env.sh
+    dos2unix /home/hadooptanhung/hive/conf/hive-env.sh && \
+    apt-get update && \
+    apt-get install -y net-tools
 
 
-CMD ["/bin/bash", "-c", "service ssh start && bash"]
+# CMD ["/bin/bash", "-c", "service ssh start && bash"]
+#CMD ["/bin/bash", "-c", "service ssh start && /home/hadooptanhung/hive/bin/hive --service hiveserver2 > /home/hadooptanhung/hiveserver2.log 2>&1"]
+# hdfs dfs -mkdir -p /user/hive/warehouse && \
+# hdfs dfs -chmod g+w /user/hive/warehouse && \
+
+CMD ["/bin/bash", "-c", "\
+    service ssh start && \
+    /home/hadooptanhung/hive/bin/hive --service hiveserver2 > /home/hadooptanhung/hiveserver2.log 2>&1"]
 
 
 

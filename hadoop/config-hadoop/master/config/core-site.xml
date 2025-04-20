@@ -36,4 +36,22 @@ limitations under the License. See accompanying LICENSE file.
         <description>Use HDFS as file storage engine</description>
 
     </property>
+
+    <property>
+        <name>hadoop.proxyuser.hadooptanhung.groups</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.hadooptanhung.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.server.hosts</name>
+        <value>*</value>
+    </property>
+    <property>
+        <name>hadoop.proxyuser.server.groups</name>
+        <value>*</value>
+    </property>
+    
 </configuration>

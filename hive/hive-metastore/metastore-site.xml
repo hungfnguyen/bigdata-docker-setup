@@ -28,4 +28,10 @@
         <name>javax.jdo.option.ConnectionPassword</name>
         <value>admin</value>
     </property>
+
+    <!-- Cho phép tự tạo schema -->
+    <property>
+        <name>datanucleus.schema.autoCreateAll</name>
+        <value>true</value>
+    </property>
 </configuration>
