@@ -1,4 +1,21 @@
 services:
+  zookeeper:
+      image: confluentinc/cp-zookeeper:7.4.0
+      hostname: zookeeper
+      container_name: zookeeper
+      ports:
+        - "2181:2181"
+      environment:
+        ZOOKEEPER_CLIENT_PORT: 2181
+        ZOOKEEPER_TICK_TIME: 2000
+      healthcheck:
+        test: ['CMD', 'bash', '-c', "echo 'ruok' | nc localhost 2181"]
+        interval: 10s
+        timeout: 5s
+        retries: 5
+      networks:
+        - data_network
+
   broker:
     image: confluentinc/cp-server:7.4.0
     hostname: broker
@@ -29,7 +46,7 @@ services:
       CONFLUENT_METRICS_ENABLE: 'false'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
     networks:
-      - confluent
+      - data_network
     healthcheck:
       test: [ "CMD", "bash", "-c", 'nc -z localhost 9092' ]
       interval: 10s
@@ -50,7 +67,7 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
       SCHEMA_REGISTRY_LISTENERS: http://0.0.0.0:8081
     networks:
-      - confluent
+      - data_network
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8081/" ]
       interval: 30s
@@ -78,9 +95,15 @@ services:
       CONFLUENT_METRICS_ENABLE: 'false'
       PORT: 9021
     networks:
-      - confluent
+      - data_network
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:9021/health" ]
       interval: 30s
       timeout: 10s
       retries: 5
+
+networks:
+  data_network:
+    driver: bridge
+    name: data_network
+    external: true
