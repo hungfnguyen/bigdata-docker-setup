@@ -89,6 +89,7 @@ networks:
   data_network:
     driver: bridge
     name: data_network
+    external: true
 
 volumes:
   mariadb: {}

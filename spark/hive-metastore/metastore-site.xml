@@ -27,4 +27,5 @@
     <property>
         <name>javax.jdo.option.ConnectionPassword</name>
         <value>admin</value>
+    </property>
 </configuration>
