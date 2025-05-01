@@ -52,6 +52,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    mem_limit: 1500m
 
   schema-registry:
     image: confluentinc/cp-schema-registry:7.4.0
@@ -101,6 +102,7 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+    mem_limit: 1000m
 
 networks:
   data_network:

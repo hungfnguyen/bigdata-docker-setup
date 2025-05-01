@@ -16,11 +16,13 @@ services:
       - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
       - SPARK_SSL_ENABLED=no
       - SPARK_USER=spark
+      - SPARK_EXTRA_CLASSPATH=/root/.ivy2/jars/*
     volumes:
       - ./conf/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
       - ./conf/log4j.properties:/opt/bitnami/spark/conf/log4j.properties
       - /home/hungfnguyen/data_engineer/projects/bigdata-docker-setup/hadoop/config-hadoop/master/config/core-site.xml:/opt/bitnami/spark/conf/core-site.xml
       - /home/hungfnguyen/data_engineer/projects/bigdata-docker-setup/hadoop/config-hadoop/master/config/hdfs-site.xml:/opt/bitnami/spark/conf/hdfs-site.xml
+      #- ./gmm:/opt/spark-apps
     networks:
       - data_network
 
@@ -36,6 +38,9 @@ services:
       - /home/hungfnguyen/data_engineer/projects/bigdata-docker-setup/hadoop/config-hadoop/master/config/hdfs-site.xml:/opt/bitnami/spark/conf/hdfs-site.xml
     networks:
       - data_network
+    mem_limit: 1000m
+    environment:
+      - SPARK_EXTRA_CLASSPATH=/root/.ivy2/jars/*
 
   mariadb:
     image: mariadb:10.5.16
