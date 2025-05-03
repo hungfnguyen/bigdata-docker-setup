@@ -3,3 +3,4 @@ hive/mariadb/
 services
 hive-test-hiveserver2
 spark/mariadb
+data/

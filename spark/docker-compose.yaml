@@ -89,6 +89,26 @@ services:
       - ./conf/hive-site.xml:/opt/bitnami/spark/conf/hive-site.xml
     networks:
       - data_network
+  
+  spark-notebook:
+    build: 
+      context: ../spark-notebook
+      dockerfile: ./Dockerfile
+    container_name: "spark-notebook"
+    user: root
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - GRANT_SUDO=yes
+    volumes:
+      - ./notebooks:/home/jovyan/work  # Mount thư mục chứa notebook
+      - ../data:/home/jovyan/data      # Mount thư mục chứa dữ liệu nếu cần
+      - ./spark-notebook/conf/spark-defaults.conf:/usr/local/spark/conf/spark-defaults.conf
+    ports:
+      - "8890:8888"
+      - "4040:4040"
+    networks:
+      - data_network
+
 
 networks:
   data_network:
